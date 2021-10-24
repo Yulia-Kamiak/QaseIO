@@ -8,32 +8,38 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class ProjectsPage {
 
-    public static final String CREATE_PRODUCT_BUTTON = "#createButton";
-    public static final String TITLE_LOCATOR = "#inputTitle";
-    public static final String CODE_LOCATOR = "#inputCode";
-    public static final String DESCRIPTION_LOCATOR = "#inputDescription";
+    public static final String CREATE_PROJECT_CSS = "#createButton";
+    public static final String TITLE_CSS = "#inputTitle";
+    public static final String CODE_CSS = "#inputCode";
+    public static final String DESCRIPTION_CSS = "#inputDescription";
+    public static final String PROJECT_TITLES_CSS = "a.defect-title";
+    public static final String PROJECTS_OPTIONS_XPATH = "//a[contains(text(), '%s')]//ancestor::*[@class='project-row']" +
+            "//*[contains(@class, 'btn-dropdown')]";
+    public static final String DELETE_PROJECT_XPATH = "//a[contains(text(), '%s')]//ancestor::*[@class=" +
+            "'project-row']//*[contains(@class, 'text-danger')]";
+    public static final String SUBMIT_DELETE_CSS = ".btn-cancel";
 
     public ProjectsPage isOpened() {
-        $(CREATE_PRODUCT_BUTTON).shouldBe(Condition.visible);
+        $(CREATE_PROJECT_CSS).shouldBe(Condition.visible);
         return this;
     }
 
-    public ProjectsPage clickCreateProduct() {
-        $(CREATE_PRODUCT_BUTTON).click();
-        $(TITLE_LOCATOR).shouldBe(Condition.visible);
+    public ProjectsPage clickCreate() {
+        $(CREATE_PROJECT_CSS).click();
+        $(TITLE_CSS).shouldBe(Condition.visible);
         return this;
     }
 
     public ProjectsPage fillNewProjectForm(String projectName, String codeName, String description, String accessType,
                                            String memberAccess) {
-        $(TITLE_LOCATOR).sendKeys(projectName);
+        $(TITLE_CSS).sendKeys(projectName);
         if(StringUtils.isEmpty(codeName)) {
-            $(CODE_LOCATOR).sendKeys(codeName);
+            $(CODE_CSS).sendKeys(codeName);
         }
-        $(DESCRIPTION_LOCATOR).sendKeys(description);
+        $(DESCRIPTION_CSS).sendKeys(description);
         switch (accessType) {
             case "Public": {
-                $("public-access-type").click();
+                $("#public-access-type").click();
                 break;
             }
             case "Private": {
@@ -52,15 +58,30 @@ public class ProjectsPage {
                 break;
             }
         }
-        $(DESCRIPTION_LOCATOR).submit();
+        return this;
+    }
+
+    public ProjectsPage clickSave() {
+        $(DESCRIPTION_CSS).submit();
+        $(DESCRIPTION_CSS).shouldBe(Condition.disappear);
         return this;
     }
 
     public ProjectDetailsPage openProject(String name) {
-        $$("a.defect-title").findBy(Condition.text(name)).click();
+        $$(PROJECT_TITLES_CSS).findBy(Condition.text(name)).click();
         $(By.xpath("//div(contains(@id, 'react-select'))"));
-        //title i dropdown заполнить
-        //по возможности
         return new ProjectDetailsPage();
+    }
+
+    public ProjectsPage deleteProject(String name) {
+        try {
+            $(By.xpath(String.format(PROJECTS_OPTIONS_XPATH, name))).click();
+            $(By.xpath(String.format(DELETE_PROJECT_XPATH, name))).click();
+            $(SUBMIT_DELETE_CSS).click();
+        } catch (Exception ex) {
+            System.out.println("Cannot delete project");
+            ex.printStackTrace();
+        }
+        return this;
     }
 }

@@ -1,19 +1,22 @@
 package tests;
 
+import models.TestCase;
+import models.TestCaseFactory;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
-public class CaseTest {
+public class CaseTest extends BaseTest{
+
+    TestCase testСase;
 
     @Test
     public void testCaseShouldBeCreated() {
-        //create project using API
         new LoginPage()
                 .open()
-                .login("vvv.zenkevich@gmail.com", "password03")
-                .openProject("This project");
-        //open project by name
-        //create case
-        //validate case info
+                .login(user, pass)
+                .openProject("This project")
+                .clickCreateCase()
+                .fillTestCase(testСase = TestCaseFactory.get())
+                .saveTestCase();
     }
 }

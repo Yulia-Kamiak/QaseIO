@@ -9,10 +9,11 @@ public class ProjectTest extends BaseTest{
     public void projectShouldBeCreated() {
         new LoginPage()
                 .open()
-                .login("vvv.zenkevich@gmail.com", "password03")
-                .isOpened()
-                .clickCreateProduct()
-                .fillNewProjectForm("THIS PROJECT", "", "Write smth", "Public",
-                        "");
+                .login(user, pass)
+                .deleteProject("This project")
+                .clickCreate()
+                .fillNewProjectForm("This project", "", "Write smth", "Public",
+                        "")
+                .clickSave();
     }
 }
