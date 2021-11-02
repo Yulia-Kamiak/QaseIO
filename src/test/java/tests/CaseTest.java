@@ -14,7 +14,11 @@ public class CaseTest extends BaseTest{
         new LoginPage()
                 .open()
                 .login(user, pass)
-                .openProject("This project")
+                .deleteProject("This project")
+                .clickCreate()
+                .fillNewProjectForm("This project", "", "Write smth", "Public",
+                        "")
+                .clickSave()
                 .clickCreateCase()
                 .fillTestCase(testСase = TestCaseFactory.get())
                 .saveTestCase();

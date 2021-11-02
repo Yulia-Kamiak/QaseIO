@@ -61,10 +61,10 @@ public class ProjectsPage {
         return this;
     }
 
-    public ProjectsPage clickSave() {
+    public ProjectDetailsPage clickSave() {
         $(DESCRIPTION_CSS).submit();
         $(DESCRIPTION_CSS).shouldBe(Condition.disappear);
-        return this;
+        return new ProjectDetailsPage();
     }
 
     public ProjectDetailsPage openProject(String name) {
@@ -74,14 +74,9 @@ public class ProjectsPage {
     }
 
     public ProjectsPage deleteProject(String name) {
-        try {
-            $(By.xpath(String.format(PROJECTS_OPTIONS_XPATH, name))).click();
-            $(By.xpath(String.format(DELETE_PROJECT_XPATH, name))).click();
-            $(SUBMIT_DELETE_CSS).click();
-        } catch (Exception ex) {
-            System.out.println("Cannot delete project");
-            ex.printStackTrace();
-        }
+        $(By.xpath(String.format(PROJECTS_OPTIONS_XPATH, name))).click();
+        $(By.xpath(String.format(DELETE_PROJECT_XPATH, name))).click();
+        $(SUBMIT_DELETE_CSS).click();
         return this;
     }
 }
