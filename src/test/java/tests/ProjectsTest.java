@@ -1,9 +1,8 @@
 package tests;
 
 import org.testng.annotations.Test;
-import pages.LoginPage;
 
-public class ProjectTest extends BaseTest{
+public class ProjectsTest extends BaseTest{
 
     @Test
     public void projectShouldBeCreated() {
