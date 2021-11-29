@@ -1,4 +1,6 @@
 package tests;
 
-public class SuiteTest {
+public class SuiteTest extends BaseTest{
+
+
 }

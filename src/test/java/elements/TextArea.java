@@ -20,7 +20,7 @@ public class TextArea {
 
     public void write(String text) {
         log.info(String.format("Writing text '%s' into input with label '%s'", text, label));
-        WebElement element = new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, label))));
+        WebElement element = new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, label))));
         element.clear();
         element.sendKeys(text);
     }
