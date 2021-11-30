@@ -27,6 +27,14 @@ public class Dropdown {
         driver.findElement(By.xpath(String.format(optionLocator, option))).click();
     }
 
+    public void selectWithSearch(String text) {
+        log.info(String.format("Writing text '%s' into input with label '%s'", text, label));
+        waiter(dropdownLocator,label);
+        driver.findElement(By.xpath(String.format(dropdownLocator, label))).sendKeys(text);
+        waiter(optionLocator, text);
+        driver.findElement(By.xpath(String.format(optionLocator, text))).click();
+    }
+
     public void waiter (String dropdownLocator, String option) {
         new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(dropdownLocator, option))));
     }

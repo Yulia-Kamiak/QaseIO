@@ -29,6 +29,7 @@ public class CreateProjectPage extends BasePage{
         return this;
     }
 
+    @Override
     public CreateProjectPage openPage() {
         log.info("New Project page URL is " + URL + endpoint);
         driver.get(URL + endpoint);
@@ -78,4 +79,5 @@ public class CreateProjectPage extends BasePage{
         log.info("The following alert appears: " + driver.findElement(ALERT).getText());
         return driver.findElement(ALERT).getText();
     }
+
 }

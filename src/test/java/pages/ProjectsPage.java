@@ -1,4 +1,6 @@
 package pages;
 
-public class ProjectsPage {
+public class ProjectsPage extends BasePage{
+
+
 }
