@@ -26,5 +26,4 @@ public class TestCase {
     private String automation;
     private String preconds;
     private String postcond;
-
 }
