@@ -27,7 +27,7 @@ public class DeleteProjectPage extends BasePage{
 
     public ProjectsPage confirmDeleting() {
         driver.findElement(By.xpath(DELETE_PROJECT_BUTTON)).click();
-        return new ProjectsPage;
+        return new ProjectsPage(driver);
     }
 
 }

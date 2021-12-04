@@ -49,7 +49,7 @@ public class CreateCasePage extends BasePage {
 
     public CreateCasePage populateForm(TestCase model) {
         setSuiteTitle(model.getTitle());
-        new Input(driver, "Description").write(model.getDescription());
+        new Input(driver, "description").write(model.getDescription());
         new Dropdown(driver, "status").selectWithSearch(model.getStatus());
         new Dropdown(driver, "severity").selectWithSearch(model.getSeverity());
         new Dropdown(driver, "priority").selectWithSearch(model.getPriority());

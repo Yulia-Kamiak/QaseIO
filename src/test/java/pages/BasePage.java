@@ -1,18 +1,19 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertyReader;
 
+
+@Log4j2
 public abstract class BasePage {
 
     WebDriver driver;
     WebDriverWait wait;
 
-    public final static String URL = System.getenv().getOrDefault("url", PropertyReader.getProperty("url"));
+    public final static String URL = System.getenv().getOrDefault("QASE_URL", PropertyReader.getProperty("qase.url"));
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -20,6 +21,7 @@ public abstract class BasePage {
     }
 
     public abstract BasePage getPageIfOpened();
+
 
     public abstract BasePage openPage();
 
