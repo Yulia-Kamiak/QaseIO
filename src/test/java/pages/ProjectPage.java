@@ -8,14 +8,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 @Log4j2
 public class ProjectPage extends BasePage{
 
-    private static final By PROJECT_LABEL = By.cssSelector(".header");
+    private static final By PROJECT_LABEL = By.xpath("//*[starts-with(@class, 'style_title')]");
     private static final By CODE_LABEL = By.cssSelector(".subheader");
     private static final By CREATE_SUITE_BUTTON = By.xpath("//*[contains(text(), 'Create new suite')]");
     private static final By CREATE_CASE_BUTTON = By.xpath("//*[contains(text(), 'Create new case')]");
-    private static final String caseLocator = "//*[@class='case-row']//*[contains(text(),'%s')]";
-    private static final String suiteLocator = "//*[@class='suite-header-title'][text()='%s']";
+    private static final String caseLocator = "//*[starts-with(@class, 'style_caseTitle')][text()='%s']";
+    private static final String suiteLocator = "//*[starts-with(@class,'style_titleText')][text()='%s']";
 
-    private static final String endpointPattern = "project/%s";
+    private static final String endpointPattern = "/project/%s";
     public static String endpoint;
 
     public ProjectPage(WebDriver driver) {

@@ -13,7 +13,7 @@ public class LoginPage extends BasePage{
     private final By LOGIN_BUTTON = By.id("btnLogin");
     private final By ERROR = By.cssSelector(".form-control-feedback");
 
-    private static final String endpoint = "login";
+    private static final String endpoint = "/login";
 
     public LoginPage(WebDriver driver) {
         super(driver);

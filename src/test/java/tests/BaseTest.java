@@ -1,11 +1,12 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.*;
 import steps.*;
 import utils.PropertyReader;
 import utils.TestListener;
@@ -32,6 +33,8 @@ public class BaseTest {
     public void setup () {
         //Configuration.baseUrl = System.getenv().getOrDefault("QASE_URL",
         //        PropertyReader.getProperty("qase.url"));
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver();
         Configuration.timeout = 20000;
         Configuration.pageLoadTimeout = 60000;
         Configuration.browser = "firefox";

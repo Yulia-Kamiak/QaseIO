@@ -21,20 +21,18 @@ public class BaseAdapter {
                         .get(URLAPI + urli)
                         .then()
                         .log().all();
-
     }
 
     public ValidatableResponse post(String urli, String body) {
-        return
-                given()
-                        .header("Token", token)
-                        .header("Content-Type", "application/json")
-                        .body(body)
-                        .log().all()
-                        .when()
-                        .post(URLAPI + urli)
-                        .then()
-                        .log().all();
+        return given()
+                .header("Token", token)
+                .header("Content-Type", "application/json")
+                .body(body)
+                .log().all()
+                .when()
+                .post(URLAPI + urli)
+                .then()
+                .log().all();
     }
 
     public ValidatableResponse patch(String urli, String body) {

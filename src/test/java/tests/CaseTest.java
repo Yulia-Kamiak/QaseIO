@@ -5,6 +5,7 @@ import io.qameta.allure.Feature;
 import models.TestCase;
 import models.Project;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.RandomString;
@@ -45,5 +46,14 @@ public class CaseTest extends BaseTest {
         projectSteps.clickCreateNewCase();
         createCaseSteps.populateNewSuiteFormFull(caseModel);
         Assert.assertEquals(projectSteps.getCaseName(caseModel), caseModel.getTitle(), "Case name does not match to expected");
+    }
+
+    @AfterMethod(description = "Delete Project")
+    @Override
+    public void exit() {
+
+        projectsAdapter.delete(project);
+
+        super.exit();
     }
 }

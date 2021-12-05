@@ -2,6 +2,7 @@ package adapters;
 
 import io.restassured.response.ValidatableResponse;
 import models.Project;
+import models.Response;
 
 public class ProjectsAdapter extends BaseAdapter {
 
@@ -17,5 +18,9 @@ public class ProjectsAdapter extends BaseAdapter {
 
     public ValidatableResponse getSingle(String projectCode) {
         return get(String.format("%s/%s", URL, projectCode));
+    }
+
+    public ValidatableResponse delete(Project project) {
+        return delete(String.format("%s/%s", URL, project.getCode()));
     }
 }

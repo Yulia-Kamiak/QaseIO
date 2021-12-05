@@ -11,8 +11,9 @@ public class Dropdown {
 
     WebDriver driver;
     String label;
-    String dropdownLocator = "//*[text()='%s']/parent::div//div[contains(@class, 'container')]";
-    String optionLocator = "//*[contains(@id, 'react-select') and contains(text(),'%s')]";
+
+    String dropdownLocator = "//div[@class='form-group']/label[contains(text(),'%s')]/ancestor::div[@class='form-group']/div[contains(@class, 'container')]";
+    String optionLocator = "//div[contains(@id,'react-select') and contains(text(),'%s')]";
 
     public Dropdown (WebDriver driver, String label) {
         this.driver = driver;

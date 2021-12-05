@@ -13,7 +13,7 @@ public class CreateSuitePage extends BasePage {
 
     private final By SAVE_BUTTON = By.xpath("//*[text()='Create']");
     private final By SUITE_NAME_INPUT = By.id("name");
-    private static final String endpointPattern = "suite/%s/create";
+    private static final String endpointPattern = "/suite/%s/create";
     public static String endpoint;
 
     public CreateSuitePage(WebDriver driver) {
@@ -60,8 +60,8 @@ public class CreateSuitePage extends BasePage {
 
     public CreateSuitePage populateForm(TestSuite model) {
         setSuiteTitle(model.getTitle());
-        setSuiteDescription(model.getDescription());
-        setSuitePreconditions(model.getPreconditions());
+//        setSuiteDescription(model.getDescription());
+//        setSuitePreconditions(model.getPreconditions());
         clickSubmitButton();
         return this;
     }

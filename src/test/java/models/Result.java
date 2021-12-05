@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @Data
@@ -26,7 +25,7 @@ public class Result {
     private Integer count;
     @SerializedName("entities")
     @Expose
-    private List<Entity> entities = null;
+    private List<Result> entities = null;
     @SerializedName("title")
     @Expose
     private String title;

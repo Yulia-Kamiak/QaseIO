@@ -80,7 +80,7 @@ public class ApiProjectTest {
 
         ValidatableResponse response =  projectsAdapter.post(project);
         String errorMessage = response.extract().body().as(ErrorResponse.class).getErrorFields().get(0).getError();
-        Assert.assertEquals(errorMessage, "Title is required","Error message is not correct");
+        Assert.assertEquals(errorMessage, "Title is required.","Error message is not correct");
     }
 
     @Test(description = "API: Check project can't be created without code")
@@ -95,6 +95,6 @@ public class ApiProjectTest {
 
         ValidatableResponse response =  projectsAdapter.post(project);
         String errorMessage = response.extract().body().as(ErrorResponse.class).getErrorFields().get(0).getError();
-        Assert.assertEquals(errorMessage, "Project code is required","Error message is not correct");
+        Assert.assertEquals(errorMessage, "Project code is required.","Error message is not correct");
     }
 }

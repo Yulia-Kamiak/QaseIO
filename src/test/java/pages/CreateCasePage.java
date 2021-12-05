@@ -2,6 +2,7 @@ package pages;
 
 import elements.Dropdown;
 import elements.Input;
+import elements.TextArea;
 import models.TestCase;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -12,9 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class CreateCasePage extends BasePage {
 
     private static final By SAVE_BUTTON = By.xpath("//*[text()='Save']");
-    private static final String CASE_TITLE_INPUT = "Title";
+    private final By CASE_TITLE_INPUT = By.id("title");
     private static final String CASE_DESCRIPTION_INPUT = "Description";
-    private static final String endpointPattern = "case/%s/create";
+    private static final String endpointPattern = "/case/%s/create";
     public static String endpoint;
 
     public CreateCasePage(WebDriver driver) {
@@ -50,13 +51,13 @@ public class CreateCasePage extends BasePage {
 
     public CreateCasePage populateForm(TestCase model) {
         setSuiteTitle(model.getTitle());
-        new Input(driver, "Case description", CASE_DESCRIPTION_INPUT).write(model.getDescription());
-        new Dropdown(driver, "status").selectWithSearch(model.getStatus());
-        new Dropdown(driver, "severity").selectWithSearch(model.getSeverity());
-        new Dropdown(driver, "priority").selectWithSearch(model.getPriority());
-        new Dropdown(driver, "type").selectWithSearch(model.getType());
-        new Dropdown(driver, "behavior").selectWithSearch(model.getBehavior());
-        new Dropdown(driver, "automationStatus").selectWithSearch(model.getAutomation());
+//        new TextArea(driver, "Description").write(model.getDescription());
+        new Dropdown(driver, "Status").selectOption(model.getStatus());
+        new Dropdown(driver, "Severity").selectOption(model.getSeverity());
+        new Dropdown(driver, "Priority").selectOption(model.getPriority());
+        new Dropdown(driver, "Type").selectOption(model.getType());
+        new Dropdown(driver, "Behavior").selectOption(model.getBehavior());
+        new Dropdown(driver, "Automation status").selectOption(model.getAutomation());
         clickSaveButton();
         return this;
     }

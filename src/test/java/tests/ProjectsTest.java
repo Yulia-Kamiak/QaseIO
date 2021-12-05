@@ -1,7 +1,10 @@
 package tests;
 
+import adapters.ProjectsAdapter;
 import io.qameta.allure.Feature;
+import io.restassured.response.ValidatableResponse;
 import models.Project;
+import models.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.RandomString;
@@ -10,6 +13,7 @@ import utils.RandomString;
 public class ProjectsTest extends BaseTest {
 
     RandomString randomString = new RandomString();
+    ProjectsAdapter projectsAdapter = new ProjectsAdapter();
 
     @Test(description = "Verify that New project was created")
     public void checkNewProjectCreated() {
@@ -22,7 +26,9 @@ public class ProjectsTest extends BaseTest {
         loginSteps.validLogin(USERNAME, PASSWORD);
         projectsSteps.clickCreateNewProject();
         createProjectSteps.populateNewProjectFormFull(model);
-        Assert.assertEquals(projectSteps.getProjectName(model.getCode()), model.getTitle(), "Project name does not match to expected");
+        ValidatableResponse getProjectResponse = projectsAdapter.getSingle(model.getCode());
+        Response response = getProjectResponse.extract().body().as(Response.class);
+        Assert.assertEquals(response.getResult().getTitle(), model.getTitle(), "Project name does not match to expected");
     }
 
     @Test(description = "Verify that Code value cant be shorter than 2 characters")

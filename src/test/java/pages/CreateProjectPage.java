@@ -17,7 +17,7 @@ public class CreateProjectPage extends BasePage{
     private final By ERROR = By.cssSelector(".form-control-feedback");
     private final By ALERT = By.cssSelector(".alert-message");
 
-    private static final String endpoint = "project/create";
+    private static final String endpoint = "/project/create";
 
     public CreateProjectPage(WebDriver driver) {
         super(driver);

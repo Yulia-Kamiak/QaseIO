@@ -11,15 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Log4j2
 public class Input {
 
-    private static final String INPUT = "//label[contains(text(),'%s')]/ancestor::div[@class='form-group']//p";
-
     WebDriver driver;
     String label;
     By locator;
-
-    public Input(WebDriver driver, String label, String name) {
-        this(driver, label, By.xpath(String.format(INPUT, name)));
-    }
 
     public Input(WebDriver driver, String label, By locator) {
         this.driver = driver;

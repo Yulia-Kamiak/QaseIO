@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class ProjectsPage extends BasePage{
 
     private final By CREATE_BUTTON = By.id("createButton");
-    private static final String endpoint = "projects";
+    private static final String endpoint = "/projects";
     private static final String projectLocator = "//*[@class='project-row']//*[contains(text(),'%s')]";
 
     public ProjectsPage(WebDriver driver) {
