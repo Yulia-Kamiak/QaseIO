@@ -1,7 +1,6 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;

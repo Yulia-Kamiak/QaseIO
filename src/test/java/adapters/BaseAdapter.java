@@ -10,35 +10,21 @@ public class BaseAdapter {
 
     public static final String token = System.getenv().getOrDefault("token", PropertyReader.getProperty("token"));
     public static final String URLAPI = System.getenv().getOrDefault("urlApi", PropertyReader.getProperty("urlApi"));
-
     Gson converter = new Gson();
 
-    public ValidatableResponse get(String uri) {
+    public ValidatableResponse get(String urli) {
         return
                 given()
                         .header("Token", token)
                         .header("Content-Type", "application/json")
                         .when()
-                        .get(URLAPI + uri)
+                        .get(URLAPI + urli)
                         .then()
                         .log().all();
 
     }
 
-    public ValidatableResponse post(String uri, String body) {
-        return
-                given()
-                        .header("Token", token)
-                        .header("Content-Type", "application/json")
-                        .body(body)
-                        .log().all()
-                        .when()
-                        .post(URLAPI + uri)
-                        .then()
-                        .log().all();
-    }
-
-    public ValidatableResponse patch(String uri, String body) {
+    public ValidatableResponse post(String urli, String body) {
         return
                 given()
                         .header("Token", token)
@@ -46,21 +32,33 @@ public class BaseAdapter {
                         .body(body)
                         .log().all()
                         .when()
-                        .patch(URLAPI + uri)
+                        .post(URLAPI + urli)
                         .then()
                         .log().all();
     }
 
-    public ValidatableResponse delete(String uri) {
+    public ValidatableResponse patch(String urli, String body) {
+        return
+                given()
+                        .header("Token", token)
+                        .header("Content-Type", "application/json")
+                        .body(body)
+                        .log().all()
+                        .when()
+                        .patch(URLAPI + urli)
+                        .then()
+                        .log().all();
+    }
+
+    public ValidatableResponse delete(String urli) {
         return
                 given()
                         .header("Token", token)
                         .header("Content-Type", "application/json")
                         .log().all()
                         .when()
-                        .delete(URLAPI + uri)
+                        .delete(URLAPI + urli)
                         .then()
                         .log().all();
     }
-
 }

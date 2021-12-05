@@ -11,8 +11,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 @Log4j2
 public class CreateCasePage extends BasePage {
 
-    private final By SAVE_BUTTON = By.xpath("//*[text()='Save']");
-    private final By CASE_TITLE_INPUT = By.id("title");
+    private static final By SAVE_BUTTON = By.xpath("//*[text()='Save']");
+    private static final String CASE_TITLE_INPUT = "Title";
+    private static final String CASE_DESCRIPTION_INPUT = "Description";
     private static final String endpointPattern = "case/%s/create";
     public static String endpoint;
 
@@ -49,7 +50,7 @@ public class CreateCasePage extends BasePage {
 
     public CreateCasePage populateForm(TestCase model) {
         setSuiteTitle(model.getTitle());
-        new Input(driver, "description").write(model.getDescription());
+        new Input(driver, "Case description", CASE_DESCRIPTION_INPUT).write(model.getDescription());
         new Dropdown(driver, "status").selectWithSearch(model.getStatus());
         new Dropdown(driver, "severity").selectWithSearch(model.getSeverity());
         new Dropdown(driver, "priority").selectWithSearch(model.getPriority());
@@ -59,5 +60,5 @@ public class CreateCasePage extends BasePage {
         clickSaveButton();
         return this;
     }
-
 }
+
