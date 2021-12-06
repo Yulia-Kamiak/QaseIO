@@ -15,20 +15,20 @@ public class CreateProjectSteps {
     }
 
     @Step("Populating Create New Project form with name, code and description")
-    public CreateProjectSteps populateNewProjectFormFull(Project model) {
+    public CreateProjectSteps populateNewProjectForm(Project model) {
         createProjectPage.getPageIfOpened().populateForm(model);
         return this;
     }
 
     @Step("Checking error message with short code value")
-    public String checkShortCodeMessage(Project model) {
-        log.info(String.format("Short code is '%s'", model.getCode()));
+    public String checkErrorMessage(Project model) {
+        log.info("Checking error message for project with code {}", model.getCode());
         return createProjectPage.getErrorText();
     }
 
-    @Step("Checking error message with short code value")
-    public String checkSameCodeMessage(Project model) {
-        log.info(String.format("Code is '%s'", model.getCode()));
+    @Step("Checking alert message with short code value")
+    public String checkAlertText(Project model) {
+        log.info("Checking alert message for project with code {}", model.getCode());
         return createProjectPage.getAlertText();
     }
 }

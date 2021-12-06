@@ -23,9 +23,9 @@ public class ProjectsTest extends BaseTest {
                 .description(randomString.StringRandom(4))
                 .build();
 
-        loginSteps.validLogin(USERNAME, PASSWORD);
+        loginSteps.performLogin(USERNAME, PASSWORD);
         projectsSteps.clickCreateNewProject();
-        createProjectSteps.populateNewProjectFormFull(model);
+        createProjectSteps.populateNewProjectForm(model);
         ValidatableResponse getProjectResponse = projectsAdapter.getSingle(model.getCode());
         Response response = getProjectResponse.extract().body().as(Response.class);
         Assert.assertEquals(response.getResult().getTitle(), model.getTitle(), "Project name does not match to expected");
@@ -39,9 +39,9 @@ public class ProjectsTest extends BaseTest {
                 .description(randomString.StringRandom(4))
                 .build();
 
-        loginSteps.validLogin(USERNAME, PASSWORD);
+        loginSteps.performLogin(USERNAME, PASSWORD);
         projectsSteps.clickCreateNewProject();
-        String errorMessage = createProjectSteps.populateNewProjectFormFull(model).checkShortCodeMessage(model);
+        String errorMessage = createProjectSteps.populateNewProjectForm(model).checkErrorMessage(model);
         Assert.assertEquals(errorMessage, "The code must be at least 2 characters.", "Error message is not correct");
     }
 
@@ -60,11 +60,11 @@ public class ProjectsTest extends BaseTest {
                 .description(randomString.StringRandom(4))
                 .build();
 
-        loginSteps.validLogin(USERNAME, PASSWORD);
+        loginSteps.performLogin(USERNAME, PASSWORD);
         projectsSteps.clickCreateNewProject();
-        createProjectSteps.populateNewProjectFormFull(project1);
+        createProjectSteps.populateNewProjectForm(project1);
         projectsSteps.openProjectsPage().clickCreateNewProject();
-        String alertMessage = createProjectSteps.populateNewProjectFormFull(project2).checkSameCodeMessage(project2);
+        String alertMessage = createProjectSteps.populateNewProjectForm(project2).checkAlertText(project2);
         Assert.assertEquals(alertMessage, "Project with the same code already exists.", "Alert message is not correct");
     }
 }

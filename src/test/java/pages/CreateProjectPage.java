@@ -37,6 +37,7 @@ public class CreateProjectPage extends BasePage{
     }
 
     public CreateProjectPage populateForm(Project model) {
+        log.info("New project form populated with data {}", model);
         setProjectTitle(model.getTitle());
         setProjectCode(model.getCode());
         setProjectDescription(model.getDescription());

@@ -8,6 +8,7 @@ import pages.CreateCasePage;
 
 @Log4j2
 public class CreateCaseSteps {
+
     private CreateCasePage createCasePage;
 
     public CreateCaseSteps(WebDriver driver) {
@@ -15,8 +16,12 @@ public class CreateCaseSteps {
     }
 
     @Step("Populating Create New Case form")
-    public CreateCaseSteps populateNewSuiteFormFull(TestCase model) {
-        createCasePage.getPageIfOpened().populateForm(model);
+    public CreateCaseSteps populateNewSuiteForm(TestCase model) {
+        log.info("Populate new suite form with data {}", model);
+        createCasePage
+                .getPageIfOpened()
+                .populateForm(model)
+                .clickSaveButton();
         return this;
     }
 }

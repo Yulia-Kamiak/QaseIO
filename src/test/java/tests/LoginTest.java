@@ -15,7 +15,9 @@ public class LoginTest extends BaseTest {
 
     @Test(description = "Check Error message with incorrect credentials", dataProvider = "incorrectLoginData")
     public void checkErrorWithIncorrectCredentials(String username, String password) {
-        String errorMessage = loginSteps.checkInvalidCredentialsMessage(username,password);
+        String errorMessage = loginSteps
+                .performLogin(username, password)
+                .checkInvalidCredentialsMessage();
         Assert.assertEquals(errorMessage,"These credentials do not match our records.", "Error message is not correct");
     }
 }

@@ -33,12 +33,13 @@ public class CreateSuitePage extends BasePage {
 
     @Override
     public CreateSuitePage openPage() {
-        log.info("Create Suite page URL is " + URL + endpoint);
+        log.info("Create Suite page URL is {}{}", URL, endpoint);
         driver.get(URL + endpoint);
         return this;
     }
 
     public CreateSuitePage setSuiteTitle(String title) {
+        log.info("Set suite title {}", title);
         new Input(driver, "Suite Name", SUITE_NAME_INPUT).write(title);
         return this;
     }
@@ -54,16 +55,14 @@ public class CreateSuitePage extends BasePage {
     }
 
     public CreateSuitePage clickSubmitButton() {
+        log.info("Click submit button");
         driver.findElement(SAVE_BUTTON).click();
         return this;
     }
 
     public CreateSuitePage populateForm(TestSuite model) {
+        log.info("Populate case suite form with data {}", model);
         setSuiteTitle(model.getTitle());
-//        setSuiteDescription(model.getDescription());
-//        setSuitePreconditions(model.getPreconditions());
-        clickSubmitButton();
         return this;
     }
-
 }

@@ -5,7 +5,6 @@ import io.qameta.allure.Feature;
 import models.Project;
 import models.TestSuite;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.RandomString;
@@ -25,8 +24,9 @@ public class SuiteTest extends BaseTest {
                 .code(randomString.StringRandom(4))
                 .description(randomString.StringRandom(4))
                 .build();
+
         projectsAdapter.post(project);
-        loginSteps.validLogin(USERNAME, PASSWORD);
+        loginSteps.performLogin(USERNAME, PASSWORD);
         projectSteps.getProjectName(project.getCode());
     }
 
@@ -40,7 +40,7 @@ public class SuiteTest extends BaseTest {
                 .build();
 
         projectSteps.clickCreateNewSuite();
-        createSuiteSteps.populateNewSuiteFormFull(suite);
+        createSuiteSteps.populateNewSuiteForm(suite);
         Assert.assertEquals(projectSteps.getSuiteName(suite), suite.getTitle(), "Suite name does not match to expected");
     }
 }

@@ -14,24 +14,19 @@ public class LoginSteps {
     }
 
     @Step("Checking error message with invalid credentials '{username}'/ '{password}'")
-    public String checkInvalidCredentialsMessage(String username, String password) {
-        log.info(String.format("Invalid login is '%s'", username));
-        log.info(String.format("Invalid password is '%s'", password));
+    public String checkInvalidCredentialsMessage() {
+        log.info("Checking error message");
 
-        return doingLogin(username, password).getErrorText();
+        return loginPage.getErrorText();
     }
 
-    @Step("Entering valid credentials")
-    public LoginSteps validLogin(String username, String password) {
-        doingLogin(username, password);
-        return this;
-    }
-
-    private LoginPage doingLogin(String username, String password) {
-        return loginPage
+    @Step("Login with credentials")
+    public LoginSteps performLogin(String username, String password) {
+        log.info("Login with login {} and password {}", username, password);
+        loginPage
                 .openPage()
                 .getPageIfOpened()
                 .attemptLogin(username, password);
+        return this;
     }
-
 }

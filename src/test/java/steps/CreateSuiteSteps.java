@@ -14,9 +14,12 @@ public class CreateSuiteSteps {
         createSuitePage = new CreateSuitePage(driver);
     }
 
-    @Step("Populating Create New Suite form with name, description and preconditions")
-    public CreateSuiteSteps populateNewSuiteFormFull(TestSuite model) {
-        createSuitePage.getPageIfOpened().populateForm(model);
+    @Step("Populating Create New Suite form with name, description and preconditions, and submit")
+    public CreateSuiteSteps populateNewSuiteForm(TestSuite model) {
+        createSuitePage
+                .getPageIfOpened()
+                .populateForm(model)
+                .clickSubmitButton();
         return this;
     }
 }

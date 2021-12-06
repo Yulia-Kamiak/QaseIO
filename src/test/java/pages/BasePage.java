@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertyReader;
 
-
 @Log4j2
 public abstract class BasePage {
 
@@ -22,7 +21,6 @@ public abstract class BasePage {
 
     public abstract BasePage getPageIfOpened();
 
-
     public abstract BasePage openPage();
 
     public boolean isElementDisplayed(By locator) {
@@ -33,5 +31,4 @@ public abstract class BasePage {
         }
         return true;
     }
-
 }

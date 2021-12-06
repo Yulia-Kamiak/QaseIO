@@ -26,7 +26,7 @@ public class CaseTest extends BaseTest {
                 .description(randomString.StringRandom(4))
                 .build();
         projectsAdapter.post(project);
-        loginSteps.validLogin(USERNAME, PASSWORD);
+        loginSteps.performLogin(USERNAME, PASSWORD);
         projectSteps.getProjectName(project.getCode());
     }
 
@@ -44,7 +44,7 @@ public class CaseTest extends BaseTest {
                 .build();
 
         projectSteps.clickCreateNewCase();
-        createCaseSteps.populateNewSuiteFormFull(caseModel);
+        createCaseSteps.populateNewSuiteForm(caseModel);
         Assert.assertEquals(projectSteps.getCaseName(caseModel), caseModel.getTitle(), "Case name does not match to expected");
     }
 
