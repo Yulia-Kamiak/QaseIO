@@ -16,16 +16,19 @@ public class DeleteProjectPage extends BasePage{
 
     @Override
     public DeleteProjectPage getPageIfOpened() {
+        log.info("Get page if opened");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath((DELETE_PROJECT_BUTTON))));
         return this;
     }
 
     @Override
     public BasePage openPage() {
+        log.info("Open page");
         return null;
     }
 
     public ProjectsPage confirmDeleting() {
+        log.info("Click confirm delete project button");
         driver.findElement(By.xpath(DELETE_PROJECT_BUTTON)).click();
         return new ProjectsPage(driver);
     }

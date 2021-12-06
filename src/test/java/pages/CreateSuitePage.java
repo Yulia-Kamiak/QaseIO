@@ -22,18 +22,20 @@ public class CreateSuitePage extends BasePage {
 
     @Override
     public CreateSuitePage getPageIfOpened() {
+        log.info("Get page if opened");
         driver.switchTo().activeElement();
         wait.until(ExpectedConditions.visibilityOfElementLocated(SUITE_NAME_INPUT));
         return this;
     }
 
     public void setUrl(String code) {
+        log.info("Build url with code {}", code);
         endpoint = String.format(endpointPattern, code);
     }
 
     @Override
     public CreateSuitePage openPage() {
-        log.info("Create Suite page URL is {}{}", URL, endpoint);
+        log.info("Open page");
         driver.get(URL + endpoint);
         return this;
     }
@@ -45,11 +47,13 @@ public class CreateSuitePage extends BasePage {
     }
 
     public CreateSuitePage setSuiteDescription(String description) {
+        log.info("Set suit description {}", description);
         new TextArea(driver, "Description").write(description);
         return this;
     }
 
     public CreateSuitePage setSuitePreconditions(String preconditions) {
+        log.info("Set suite precondition {}", preconditions);
         new TextArea(driver, "Preconditions").write(preconditions);
         return this;
     }

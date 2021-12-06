@@ -21,20 +21,23 @@ public class LoginPage extends BasePage{
 
     @Override
     public LoginPage getPageIfOpened() {
+        log.info("Get page if opened");
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         return this;
     }
 
     @Override
     public LoginPage openPage() {
-        log.info("Login page URL is " + URL + endpoint);
+        log.info("Open page");
         driver.get(URL + endpoint);
         return this;
     }
 
     public LoginPage attemptLogin(String username, String password) {
+        //log.info("Set username {} and password {}", username, password);
         driver.findElement(EMAIL_INPUT).sendKeys(username);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
+        log.info("Click login button");
         driver.findElement(LOGIN_BUTTON).click();
         return this;
     }

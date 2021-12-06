@@ -22,32 +22,37 @@ public class CreateCasePage extends BasePage {
 
     @Override
     public CreateCasePage getPageIfOpened() {
+        log.info("Get page if opened");
         wait.until(ExpectedConditions.visibilityOfElementLocated(SAVE_BUTTON));
         return this;
     }
 
     public void setUrl(String code) {
+        log.info("Build url with code {}", code);
         endpoint = String.format(endpointPattern, code);
     }
 
     @Override
     public CreateCasePage openPage() {
-        log.info("Create Case page URL is {}{}", URL, endpoint);
+        log.info("Open page ");
         driver.get(URL + endpoint);
         return this;
     }
 
     public CreateCasePage setSuiteTitle(String title) {
+        log.info("Set suite title {}", title);
         new Input(driver, "Case Title", CASE_TITLE_INPUT).write(title);
         return this;
     }
 
     public CreateCasePage clickSaveButton() {
+        log.info("Click save button");
         driver.findElement(SAVE_BUTTON).click();
         return this;
     }
 
     public CreateCasePage populateForm(TestCase model) {
+        log.info("Populate form {}", model);
         setSuiteTitle(model.getTitle());
         new Dropdown(driver, "Status").selectOption(model.getStatus());
         new Dropdown(driver, "Severity").selectOption(model.getSeverity());

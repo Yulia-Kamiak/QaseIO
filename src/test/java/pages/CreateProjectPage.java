@@ -25,6 +25,7 @@ public class CreateProjectPage extends BasePage{
 
     @Override
     public CreateProjectPage getPageIfOpened() {
+        log.info("Get page if opened");
         wait.until(ExpectedConditions.visibilityOfElementLocated(SUBMIT_BUTTON));
         return this;
     }
@@ -46,37 +47,42 @@ public class CreateProjectPage extends BasePage{
     }
 
     public CreateProjectPage clickSubmitButton() {
+        log.info("Click submit button");
         driver.findElement(SUBMIT_BUTTON).click();
         return this;
     }
 
     public CreateProjectPage setProjectTitle(String title) {
+        log.info("Set project title {}", title);
         new Input(driver, "Title", TITLE_INPUT).write(title);
         return this;
     }
 
     public CreateProjectPage setProjectCode(String code) {
+        log.info("Set project code");
         new Input(driver, "Code", CODE_INPUT).write(code);
         return this;
     }
 
     public CreateProjectPage setProjectDescription(String description) {
+        log.info("Set project description {}", description);
         new Input(driver, "Description", DESCRIPTION_INPUT).write(description);
         return this;
     }
 
-    public void isErrorAppears(By message) {
+    public void waitForError(By message) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(message));
     }
 
     public String getErrorText() {
-        isErrorAppears(ERROR);
+        log.info("Get error text");
+        waitForError(ERROR);
         log.info("The following error appears: " + driver.findElement(ERROR).getText());
         return driver.findElement(ERROR).getText();
     }
 
     public String getAlertText() {
-        isErrorAppears(ALERT);
+        waitForError(ALERT);
         log.info("The following alert appears: " + driver.findElement(ALERT).getText());
         return driver.findElement(ALERT).getText();
     }

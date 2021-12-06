@@ -16,6 +16,7 @@ public class CreateProjectSteps {
 
     @Step("Populating Create New Project form with name, code and description")
     public CreateProjectSteps populateNewProjectForm(Project model) {
+        log.info("Populate new project form {}", model.getCode());
         createProjectPage.getPageIfOpened().populateForm(model);
         return this;
     }

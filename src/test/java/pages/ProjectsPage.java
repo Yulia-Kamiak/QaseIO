@@ -20,23 +20,26 @@ public class ProjectsPage extends BasePage{
     @Override
     @Step("Projects List page was opened")
     public ProjectsPage getPageIfOpened() {
+        log.info("Get project page if opened");
         wait.until(ExpectedConditions.visibilityOfElementLocated(CREATE_BUTTON));
         return this;
     }
 
     @Override
     public ProjectsPage openPage() {
-        log.info("Projects page URL is " + URL + endpoint);
+        log.info("Open page");
         driver.get(URL + endpoint);
         return this;
     }
 
     public ProjectsPage clickCreateNewProject() {
+        log.info("Click create new project button");
         driver.findElement(CREATE_BUTTON).click();
         return this;
     }
 
     public String getProjectNameText(String name) {
+        log.info("Get project name {}", name);
         isElementDisplayed(By.xpath(String.format(projectLocator, name)));
         return driver.findElement(By.xpath(String.format(projectLocator, name))).getText();
     }

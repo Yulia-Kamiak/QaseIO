@@ -16,6 +16,7 @@ public class CreateSuiteSteps {
 
     @Step("Populating Create New Suite form with name, description and preconditions, and submit")
     public CreateSuiteSteps populateNewSuiteForm(TestSuite model) {
+        log.info("Populate new suite form {}", model);
         createSuitePage
                 .getPageIfOpened()
                 .populateForm(model)
