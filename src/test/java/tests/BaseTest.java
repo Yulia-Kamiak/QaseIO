@@ -1,10 +1,8 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
 import steps.*;
@@ -31,17 +29,8 @@ public class BaseTest {
 
     @BeforeMethod(description = "Opening Firefox Driver")
     public void setup () {
-        //Configuration.baseUrl = System.getenv().getOrDefault("QASE_URL",
-        //        PropertyReader.getProperty("qase.url"));
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
-        Configuration.timeout = 20000;
-        Configuration.pageLoadTimeout = 60000;
-        Configuration.browser = "firefox";
-        Configuration.browserVersion = "93.0";
-        Configuration.startMaximized = true;
-        Configuration.headless = false;
-        Configuration.clickViaJs = false;
         loginSteps = new LoginSteps(driver);
         projectsSteps = new ProjectsSteps(driver);
         createProjectSteps = new CreateProjectSteps(driver);

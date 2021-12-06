@@ -10,9 +10,7 @@ import models.Project;
 import models.Response;
 import models.TestSuite;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import utils.RandomString;
 import utils.TestListener;
 
@@ -55,6 +53,7 @@ public class ApiSuiteTest {
         Assert.assertTrue(actualStatus, "Status is not correct");
     }
 
+    @Ignore
     @Test(description = "API: Check suite can't be created without title")
     public void testPostSuiteErrorMessage() {
         suite = TestSuite.builder()

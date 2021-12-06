@@ -1,13 +1,11 @@
 package elements;
 
-import com.codeborne.selenide.Condition;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static com.codeborne.selenide.Selenide.$x;
 
 @Log4j2
 public class TextArea {

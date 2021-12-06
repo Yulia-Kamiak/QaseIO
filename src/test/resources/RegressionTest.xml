@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="UI Regression Test" parallel="tests" thread-count="5">
+<suite name="Regression Test" parallel="tests" thread-count="2">
     <test name="projects tests">
         <classes>
             <class name="tests.ProjectsTest"/>
@@ -21,4 +21,19 @@
             <class name="tests.SuiteTest"/>
         </classes>
     </test>
+<!--    <test name="api project tests">-->
+<!--        <classes>-->
+<!--            <class name="tests.ApiProjectTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="api case tests">-->
+<!--        <classes>-->
+<!--            <class name="tests.ApiCaseTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="api suite tests">-->
+<!--        <classes>-->
+<!--            <class name="tests.ApiSuiteTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

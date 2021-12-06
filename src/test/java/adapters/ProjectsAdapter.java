@@ -2,7 +2,6 @@ package adapters;
 
 import io.restassured.response.ValidatableResponse;
 import models.Project;
-import models.Response;
 
 public class ProjectsAdapter extends BaseAdapter {
 

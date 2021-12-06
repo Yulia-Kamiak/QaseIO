@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 public class BaseAdapter {
 
     public static final String token = System.getenv().getOrDefault("token", PropertyReader.getProperty("token"));
-    public static final String URLAPI = System.getenv().getOrDefault("urlApi", PropertyReader.getProperty("urlApi"));
+    public static final String URLAPI = System.getenv().getOrDefault("urlApi", PropertyReader.getProperty("url.api"));
     Gson converter = new Gson();
 
     public ValidatableResponse get(String urli) {
