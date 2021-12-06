@@ -21,19 +21,19 @@
             <class name="tests.SuiteTest"/>
         </classes>
     </test>
-<!--    <test name="api project tests">-->
-<!--        <classes>-->
-<!--            <class name="tests.ApiProjectTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="api case tests">-->
-<!--        <classes>-->
-<!--            <class name="tests.ApiCaseTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="api suite tests">-->
-<!--        <classes>-->
-<!--            <class name="tests.ApiSuiteTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="api project tests">
+        <classes>
+            <class name="tests.ApiProjectTest"/>
+        </classes>
+    </test>
+    <test name="api case tests">
+        <classes>
+            <class name="tests.ApiCaseTest"/>
+        </classes>
+    </test>
+    <test name="api suite tests">
+        <classes>
+            <class name="tests.ApiSuiteTest"/>
+        </classes>
+    </test>
 </suite>
