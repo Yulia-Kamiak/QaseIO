@@ -22,7 +22,7 @@ public class LoginSteps {
 
     @Step("Login with credentials")
     public LoginSteps performLogin(String username, String password) {
-        log.info("Login with login {} and password {}", username, password);
+        log.info("Set credentials to login form");
         loginPage
                 .openPage()
                 .getPageIfOpened()
