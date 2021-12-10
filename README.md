@@ -59,7 +59,13 @@
 - Update specific Test Suite from project by ID and validate data
 - Delete existed Test Suite and validate that project deleted
 
+---
+### Stack
+Java 11, Selenium, REST Assured, TestNG, Maven, Allure, Lombok, Log4j2, GSON
 
+---
 ### CircleCI
 
+
 https://app.circleci.com/pipelines/github/Yulia-Kamiak/QaseIO
+
