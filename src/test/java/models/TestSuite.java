@@ -11,19 +11,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TestCase {
+public class TestSuite {
     @SerializedName("title")
     @Expose
     private String title;
-    private String status;
+    @SerializedName("parent_id")
+    @Expose
+    private Object parentId;
+    @SerializedName("description")
+    @Expose
     private String description;
-    private String suite;
-    private String severity;
-    private String priority;
-    private String type;
-    private String milestone;
-    private String behavior;
-    private String automation;
-    private String preconds;
-    private String postcond;
+    @SerializedName("preconditions")
+    @Expose
+    private String preconditions;
 }

@@ -1,82 +1,47 @@
 package pages;
 
-import com.codeborne.selenide.Condition;
-import org.apache.commons.lang.StringUtils;
+import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ProjectsPage {
+@Log4j2
+public class ProjectsPage extends BasePage{
 
-    public static final String CREATE_PROJECT_CSS = "#createButton";
-    public static final String TITLE_CSS = "#inputTitle";
-    public static final String CODE_CSS = "#inputCode";
-    public static final String DESCRIPTION_CSS = "#inputDescription";
-    public static final String PROJECT_TITLES_CSS = "a.defect-title";
-    public static final String PROJECTS_OPTIONS_XPATH = "//a[contains(text(), '%s')]//ancestor::*[@class='project-row']" +
-            "//*[contains(@class, 'btn-dropdown')]";
-    public static final String DELETE_PROJECT_XPATH = "//a[contains(text(), '%s')]//ancestor::*[@class=" +
-            "'project-row']//*[contains(@class, 'text-danger')]";
-    public static final String SUBMIT_DELETE_CSS = ".btn-cancel";
+    private final By CREATE_BUTTON = By.id("createButton");
+    private static final String endpoint = "/projects";
+    private static final String projectLocator = "//*[@class='project-row']//*[contains(text(),'%s')]";
 
-    public ProjectsPage isOpened() {
-        $(CREATE_PROJECT_CSS).shouldBe(Condition.visible);
+    public ProjectsPage(WebDriver driver) {
+        super(driver);
+    }
+
+    @Override
+    @Step("Projects List page was opened")
+    public ProjectsPage getPageIfOpened() {
+        log.info("Get project page if opened");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(CREATE_BUTTON));
         return this;
     }
 
-    public ProjectsPage clickCreate() {
-        $(CREATE_PROJECT_CSS).click();
-        $(TITLE_CSS).shouldBe(Condition.visible);
+    @Override
+    public ProjectsPage openPage() {
+        log.info("Open page");
+        driver.get(URL + endpoint);
         return this;
     }
 
-    public ProjectsPage fillNewProjectForm(String projectName, String codeName, String description, String accessType,
-                                           String memberAccess) {
-        $(TITLE_CSS).sendKeys(projectName);
-        if(StringUtils.isEmpty(codeName)) {
-            $(CODE_CSS).sendKeys(codeName);
-        }
-        $(DESCRIPTION_CSS).sendKeys(description);
-        switch (accessType) {
-            case "Public": {
-                $("#public-access-type").click();
-                break;
-            }
-            case "Private": {
-                $("#private-access-type").click();
-                switch (memberAccess) {
-                    case "Add all members to this project": {
-                        $("#accessAll").click();
-                    }
-                    case "Add members from specific group": {
-                        $("#accessGroup").click();
-                    }
-                    case "Don't add members": {
-                        $("#accessNone").click();
-                    }
-                }
-                break;
-            }
-        }
+    public ProjectsPage clickCreateNewProject() {
+        log.info("Click create new project button");
+        driver.findElement(CREATE_BUTTON).click();
         return this;
     }
 
-    public ProjectDetailsPage clickSave() {
-        $(DESCRIPTION_CSS).submit();
-        $(DESCRIPTION_CSS).shouldBe(Condition.disappear);
-        return new ProjectDetailsPage();
+    public String getProjectNameText(String name) {
+        log.info("Get project name {}", name);
+        isElementDisplayed(By.xpath(String.format(projectLocator, name)));
+        return driver.findElement(By.xpath(String.format(projectLocator, name))).getText();
     }
 
-    public ProjectDetailsPage openProject(String name) {
-        $$(PROJECT_TITLES_CSS).findBy(Condition.text(name)).click();
-        $(By.xpath("//div(contains(@id, 'react-select'))"));
-        return new ProjectDetailsPage();
-    }
-
-    public ProjectsPage deleteProject(String name) {
-        $(By.xpath(String.format(PROJECTS_OPTIONS_XPATH, name))).click();
-        $(By.xpath(String.format(DELETE_PROJECT_XPATH, name))).click();
-        $(SUBMIT_DELETE_CSS).click();
-        return this;
-    }
 }

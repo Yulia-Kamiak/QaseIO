@@ -1,25 +1,53 @@
 package pages;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import static com.codeborne.selenide.Selenide.$;
+import org.openqa.selenium.By;
+import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LoginPage {
+@Log4j2
+public class LoginPage extends BasePage{
 
-    public static final String EMAIL_CSS = "#inputEmail";
-    public static final String PASSWORD_CSS = "#inputPassword";
-    public static final String LOGIN_BUTTON_CSS = "#btnLogin";
+    private final By EMAIL_INPUT = By.id("inputEmail");
+    private final By PASSWORD_INPUT = By.id("inputPassword");
+    private final By LOGIN_BUTTON = By.id("btnLogin");
+    private final By ERROR = By.cssSelector(".form-control-feedback");
 
-    public LoginPage open () {
-        Selenide.open("https://app.qase.io");
-        $(PASSWORD_CSS).shouldBe(Condition.visible);
+    private static final String endpoint = "/login";
+
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
+
+    @Override
+    public LoginPage getPageIfOpened() {
+        log.info("Get page if opened");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         return this;
     }
 
-    public ProjectsPage login (String user, String password) {
-        $(EMAIL_CSS).sendKeys(user);
-        $(PASSWORD_CSS).sendKeys(password);
-        $(LOGIN_BUTTON_CSS).click();
-        return new ProjectsPage().isOpened();
+    @Override
+    public LoginPage openPage() {
+        log.info("Open page");
+        driver.get(URL + endpoint);
+        return this;
     }
+
+    public LoginPage attemptLogin(String username, String password) {
+        //log.info("Set username {} and password {}", username, password);
+        driver.findElement(EMAIL_INPUT).sendKeys(username);
+        driver.findElement(PASSWORD_INPUT).sendKeys(password);
+        log.info("Click login button");
+        driver.findElement(LOGIN_BUTTON).click();
+        return this;
+    }
+
+    public String getErrorText() {
+        isElementDisplayed(ERROR);
+        log.info("The following error appears: " + driver.findElement(ERROR).getText());
+        return driver.findElement(ERROR).getText();
+    }
+
 }
+
+

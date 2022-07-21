@@ -1,26 +1,59 @@
 package tests;
 
+import adapters.ProjectsAdapter;
+import io.qameta.allure.Feature;
 import models.TestCase;
-import models.TestCaseFactory;
+import models.Project;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.LoginPage;
+import utils.RandomString;
 
-public class CaseTest extends BaseTest{
+@Feature("TestCases")
+public class CaseTest extends BaseTest {
 
-    TestCase testСase;
+    RandomString randomString = new RandomString();
+    Project project;
+    TestCase caseModel;
+    ProjectsAdapter projectsAdapter = new ProjectsAdapter();
 
-    @Test
-    public void testCaseShouldBeCreated() {
-        new LoginPage()
-                .open()
-                .login(user, pass)
-                .deleteProject("This project")
-                .clickCreate()
-                .fillNewProjectForm("This project", "", "Write smth", "Public",
-                        "")
-                .clickSave()
-                .clickCreateCase()
-                .fillTestCase(testСase = TestCaseFactory.get())
-                .saveTestCase();
+    @BeforeMethod(description = "Login and Create new project")
+    public void createNewProject() {
+        project = Project.builder()
+                .title(randomString.StringRandom(4))
+                .code(randomString.StringRandom(4))
+                .description(randomString.StringRandom(4))
+                .build();
+        projectsAdapter.post(project);
+        loginSteps.performLogin(USERNAME, PASSWORD);
+        projectSteps.getProjectName(project.getCode());
+    }
+
+    @Test(description = "Verify that New Case was created")
+    public void checkNewProjectCreated() {
+        caseModel = TestCase.builder()
+                .title(randomString.StringRandom(4))
+                .status("Actual")
+                .description("asdasdasd dfyg")
+                .severity("Blocker")
+                .priority("High")
+                .type("Smoke")
+                .behavior("Positive")
+                .automation("Automated")
+                .build();
+
+        projectSteps.clickCreateNewCase();
+        createCaseSteps.populateNewSuiteForm(caseModel);
+        Assert.assertEquals(projectSteps.getCaseName(caseModel), caseModel.getTitle(), "Case name does not match to expected");
+    }
+
+    @AfterMethod(description = "Delete Project")
+    @Override
+    public void exit() {
+
+        projectsAdapter.delete(project);
+
+        super.exit();
     }
 }

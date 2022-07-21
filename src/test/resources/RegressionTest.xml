@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Test" parallel="tests" thread-count="2">
+    <test name="projects tests">
+        <classes>
+            <class name="tests.ProjectsTest"/>
+        </classes>
+    </test>
+    <test name="login tests">
+        <classes>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
+    <test name="case tests">
+        <classes>
+            <class name="tests.CaseTest"/>
+        </classes>
+    </test>
+    <test name="suite tests">
+        <classes>
+            <class name="tests.SuiteTest"/>
+        </classes>
+    </test>
+    <test name="api project tests">
+        <classes>
+            <class name="tests.ApiProjectTest"/>
+        </classes>
+    </test>
+    <test name="api case tests">
+        <classes>
+            <class name="tests.ApiCaseTest"/>
+        </classes>
+    </test>
+    <test name="api suite tests">
+        <classes>
+            <class name="tests.ApiSuiteTest"/>
+        </classes>
+    </test>
+</suite>
